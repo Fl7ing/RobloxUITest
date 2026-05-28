@@ -290,7 +290,7 @@ LeftContainer.Size = UDim2.new(0, 80, 1, 0)
 
 LeftImage1.Name = "LeftImage1"
 LeftImage1.Parent = LeftContainer
-LeftImage1.BackgroundTransparency = 1
+LeftImage1.BackgroundTransparency = 0
 LeftImage1.Position = UDim2.new(0, 0, 0.5, -20)
 LeftImage1.Size = UDim2.new(0, 40, 0, 40)
 LeftImage1.Image = "rbxassetid://128482957768595"
@@ -302,7 +302,7 @@ Left1Corner.Parent = LeftImage1
 
 LeftImage2.Name = "LeftImage2"
 LeftImage2.Parent = LeftContainer
-LeftImage2.BackgroundTransparency = 1
+LeftImage2.BackgroundTransparency = 0
 LeftImage2.Position = UDim2.new(0, 40, 0.5, -20)
 LeftImage2.Size = UDim2.new(0, 40, 0, 40)
 LeftImage2.Image = "rbxassetid://90020069968675"
@@ -327,13 +327,13 @@ Title.TextXAlignment = Enum.TextXAlignment.Center
 -- Right Container (для 2 картинок справа)
 RightContainer.Name = "RightContainer"
 RightContainer.Parent = TopBar
-RightContainer.BackgroundTransparency = 1
+RightContainer.BackgroundTransparency = 0
 RightContainer.Position = UDim2.new(1, -160, 0, 0)
 RightContainer.Size = UDim2.new(0, 80, 1, 0)
 
 RightImage1.Name = "RightImage1"
 RightImage1.Parent = RightContainer
-RightImage1.BackgroundTransparency = 1
+RightImage1.BackgroundTransparency = 0
 RightImage1.Position = UDim2.new(0, 0, 0.5, -20)
 RightImage1.Size = UDim2.new(0, 40, 0, 40)
 RightImage1.Image = "rbxassetid://117320876816834"
@@ -345,7 +345,7 @@ Right1Corner.Parent = RightImage1
 
 RightImage2.Name = "RightImage2"
 RightImage2.Parent = RightContainer
-RightImage2.BackgroundTransparency = 1
+RightImage2.BackgroundTransparency = 0
 RightImage2.Position = UDim2.new(0, 40, 0.5, -20)
 RightImage2.Size = UDim2.new(0, 40, 0, 40)
 RightImage2.Image = "rbxassetid://100093740424034"
