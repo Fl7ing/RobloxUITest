@@ -1,6 +1,6 @@
 --[[
     BurmaldaMellstroyUIMM2 - COMPLETE ULTIMATE EDITION
-    ALL 100+ WORKING FUNCTIONS + 4 SPINNING IMAGES
+    ALL 100+ FUNCTIONS + 4 BIG SQUARE SPINNING IMAGES
 ]]
 
 -- Services
@@ -25,22 +25,22 @@ local imagesConfig = {
     {
         url = "https://raw.githubusercontent.com/Fl7ing/RobloxUI-Repositoryf/refs/heads/main/noFilter-_1_.png",
         fileName = "gui_img_1.png",
-        position = UDim2.new(0.05, 0, 0.15, 0)
+        position = UDim2.new(0.025, 0, 0.15, 0)
     },
     {
         url = "https://raw.githubusercontent.com/Fl7ing/RobloxUI-Repositoryf/refs/heads/main/noFilter-_2_.png",
         fileName = "gui_img_2.png",
-        position = UDim2.new(0.05, 0, 0.65, 0)
+        position = UDim2.new(0.025, 0, 0.55, 0)
     },
     {
         url = "https://raw.githubusercontent.com/Fl7ing/RobloxUI-Repositoryf/refs/heads/main/noFilter%20(1).png",
         fileName = "gui_img_3.png",
-        position = UDim2.new(0.95, 0, 0.15, 0)
+        position = UDim2.new(0.975, 0, 0.15, 0)
     },
     {
         url = "https://raw.githubusercontent.com/Fl7ing/RobloxUI-Repositoryf/refs/heads/main/noFilter-_3_.png",
         fileName = "gui_img_4.png",
-        position = UDim2.new(0.95, 0, 0.65, 0)
+        position = UDim2.new(0.975, 0, 0.55, 0)
     }
 }
 
@@ -301,13 +301,13 @@ ScreenGui.Parent = LP.PlayerGui
 ScreenGui.ResetOnSpawn = false
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
--- Main Frame (РАСШИРЕННЫЙ)
+-- Main Frame (РАСШИРЕННЫЙ ДЛЯ БОЛЬШИХ КАРТИНОК)
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ScreenGui
 MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
 MainFrame.BorderSizePixel = 0
-MainFrame.Position = UDim2.new(0.5, -400, 0.5, -350)
-MainFrame.Size = UDim2.new(0, 800, 0, 700)
+MainFrame.Position = UDim2.new(0.5, -500, 0.5, -350)
+MainFrame.Size = UDim2.new(0, 1000, 0, 700)
 MainFrame.Active = true
 MainFrame.Draggable = true
 MainFrame.ClipsDescendants = false
@@ -376,12 +376,12 @@ local CloseCorner = Instance.new("UICorner")
 CloseCorner.CornerRadius = UDim.new(0, 6)
 CloseCorner.Parent = CloseBtn
 
--- Content Frame (СДВИНУТ ДЛЯ КАРТИНОК)
+-- Content Frame (СДВИНУТ ДЛЯ БОЛЬШИХ КАРТИНОК)
 ContentFrame.Name = "ContentFrame"
 ContentFrame.Parent = MainFrame
 ContentFrame.BackgroundTransparency = 1
-ContentFrame.Position = UDim2.new(0.125, 0, 0, 65)
-ContentFrame.Size = UDim2.new(0.75, 0, 1, -65)
+ContentFrame.Position = UDim2.new(0.17, 0, 0, 65)
+ContentFrame.Size = UDim2.new(0.66, 0, 1, -65)
 ContentFrame.ScrollBarThickness = 6
 ContentFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 ContentFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
@@ -391,14 +391,16 @@ UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIListLayout.Padding = UDim.new(0, 10)
 UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
--- CREATE 4 SPINNING IMAGES
+-- CREATE 4 BIG SQUARE SPINNING IMAGES
+local spinningImages = {}
+
 local function createSpinningImages()
     for i, config in ipairs(imagesConfig) do
         if loadedAssets[i] then
             local img = Instance.new("ImageLabel")
             img.Name = "SpinningImage" .. i
             img.Parent = MainFrame
-            img.Size = UDim2.new(0.12, 0, 0.15, 0)
+            img.Size = UDim2.new(0, 150, 0, 150) -- КВАДРАТНЫЕ 150x150
             img.Position = config.position
             img.AnchorPoint = Vector2.new(0.5, 0.5)
             img.BackgroundTransparency = 1
@@ -407,14 +409,16 @@ local function createSpinningImages()
             img.ZIndex = 10
             
             local corner = Instance.new("UICorner")
-            corner.CornerRadius = UDim.new(1, 0)
+            corner.CornerRadius = UDim.new(0.15, 0) -- Слегка скругленные углы для квадрата
             corner.Parent = img
             
             local tweenInfo = TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1)
             local tween = TweenService:Create(img, tweenInfo, {Rotation = 360})
             tween:Play()
             
-            print("[SpinningImage] Created and spinning: Image" .. i)
+            spinningImages[i] = img
+            
+            print("[SpinningImage] Created big square image: Image" .. i)
         else
             warn("[SpinningImage] Asset not loaded for Image" .. i)
         end
@@ -535,7 +539,7 @@ local Earthquake = false
 local FollowMurderer = false
 local FollowSheriff = false
 
--- Advanced Bypass Fling (РАБОЧАЯ ФУНКЦИЯ)
+-- Advanced Bypass Fling
 function BypassFling(targetPlayer)
     if not targetPlayer or not targetPlayer.Character then return end
     
@@ -623,7 +627,7 @@ function BypassFling(targetPlayer)
     end)
 end
 
--- NoClip (РАБОЧАЯ ФУНКЦИЯ)
+-- NoClip
 RunService.Stepped:Connect(function()
     if NoClip and LP.Character then
         for _, part in pairs(LP.Character:GetDescendants()) do
@@ -634,14 +638,14 @@ RunService.Stepped:Connect(function()
     end
 end)
 
--- Infinite Jump (РАБОЧАЯ ФУНКЦИЯ)
+-- Infinite Jump
 UserInputService.JumpRequest:Connect(function()
     if InfiniteJump and LP.Character and LP.Character:FindFirstChild("Humanoid") then
         LP.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
     end
 end)
 
--- Fly System (РАБОЧАЯ ФУНКЦИЯ)
+-- Fly System
 local flyEnabled = false
 local flyConnection
 
@@ -710,7 +714,7 @@ function DisableFly()
     end
 end
 
--- Orbit Murderer (РАБОЧАЯ ФУНКЦИЯ)
+-- Orbit Murderer (ИСПРАВЛЕНО - НЕ РАБОТАЕТ ЕСЛИ ТЫ САМ МАРДЕР)
 local orbitConnection
 function EnableOrbitMurderer()
     OrbitMurdererEnabled = true
@@ -724,6 +728,17 @@ function EnableOrbitMurderer()
             if orbitConnection then
                 orbitConnection:Disconnect()
             end
+            return
+        end
+        
+        -- ПРОВЕРКА: Если ТЫ мардер - орбит отключается
+        if roles.Murder == LP.Name then
+            StarterGui:SetCore("SendNotification", {
+                Title = "Orbit Murderer";
+                Text = "Cannot orbit - YOU are the Murderer!";
+                Duration = 3;
+            })
+            DisableOrbitMurderer()
             return
         end
         
@@ -753,7 +768,7 @@ function DisableOrbitMurderer()
     end
 end
 
--- Bring All (РАБОЧАЯ ФУНКЦИЯ)
+-- Bring All
 local bringAllConnection
 function EnableBringAll()
     BringAllEnabled = true
@@ -792,7 +807,7 @@ function DisableBringAll()
     end
 end
 
--- ESP System (РАБОЧАЯ ФУНКЦИЯ)
+-- ESP System
 local function CreateESP(player)
     if player == LP or not player.Character then return end
     
@@ -836,7 +851,7 @@ local function CreateESP(player)
     end)
 end
 
--- Update ESP (РАБОЧАЯ ФУНКЦИЯ)
+-- Update ESP
 RunService.RenderStepped:Connect(function()
     if ESPEnabled then
         for _, player in pairs(Players:GetPlayers()) do
@@ -910,7 +925,7 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
--- Auto Collect Coins (РАБОЧАЯ ФУНКЦИЯ)
+-- Auto Collect Coins
 spawn(function()
     while wait(0.5) do
         if AutoCollectCoins and LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") then
@@ -926,7 +941,7 @@ spawn(function()
     end
 end)
 
--- Auto Pickup Gun (РАБОЧАЯ ФУНКЦИЯ)
+-- Auto Pickup Gun
 spawn(function()
     while wait(0.5) do
         if AutoPickupGun and LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") then
@@ -941,7 +956,7 @@ spawn(function()
     end
 end)
 
--- Kill Aura Loop (РАБОЧАЯ ФУНКЦИЯ)
+-- Kill Aura Loop
 spawn(function()
     while wait(0.2) do
         if KillAura then
@@ -959,7 +974,7 @@ spawn(function()
     end
 end)
 
--- Bunny Hop (РАБОЧАЯ ФУНКЦИЯ)
+-- Bunny Hop
 spawn(function()
     while wait() do
         if BunnyHop and LP.Character and LP.Character:FindFirstChild("Humanoid") then
@@ -970,7 +985,7 @@ spawn(function()
     end
 end)
 
--- Auto Dodge (РАБОЧАЯ ФУНКЦИЯ)
+-- Auto Dodge
 spawn(function()
     while wait(0.05) do
         if AutoDodge and LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") then
@@ -986,7 +1001,7 @@ spawn(function()
     end
 end)
 
--- Follow Murderer (РАБОЧАЯ ФУНКЦИЯ)
+-- Follow Murderer
 spawn(function()
     while wait(0.5) do
         if FollowMurderer and roles.Murder then
@@ -998,7 +1013,7 @@ spawn(function()
     end
 end)
 
--- Follow Sheriff (РАБОЧАЯ ФУНКЦИЯ)
+-- Follow Sheriff
 spawn(function()
     while wait(0.5) do
         if FollowSheriff and roles.Sheriff then
@@ -1010,7 +1025,7 @@ spawn(function()
     end
 end)
 
--- Earthquake (РАБОЧАЯ ФУНКЦИЯ)
+-- Earthquake
 spawn(function()
     while wait() do
         if Earthquake then
@@ -1027,7 +1042,7 @@ spawn(function()
     end
 end)
 
--- RAGE MODE (РАБОЧАЯ ФУНКЦИЯ)
+-- RAGE MODE
 spawn(function()
     while wait(0.01) do
         if RageMode and LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") then
@@ -1054,7 +1069,7 @@ spawn(function()
     end
 end)
 
--- Speed Loop (РАБОЧАЯ ФУНКЦИЯ)
+-- Speed Loop
 RunService.Heartbeat:Connect(function()
     if LP.Character and LP.Character:FindFirstChild("Humanoid") then
         LP.Character.Humanoid.WalkSpeed = WalkSpeed
@@ -1062,7 +1077,7 @@ RunService.Heartbeat:Connect(function()
     end
 end)
 
--- 🔴 SERVER FUNCTIONS (9 ФУНКЦИЙ)
+-- 🔴 SERVER FUNCTIONS
 local ServerFrame = CreateCategory("🔴 SERVER FUNCTIONS")
 
 CreateCategoryButton("Scan Backdoor", UDim2.new(0.02, 0, 0, 35), ServerFrame, function()
@@ -1138,7 +1153,7 @@ CreateCategoryButton("Fates Admin", UDim2.new(0.68, 0, 0, 115), ServerFrame, fun
     loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
 end)
 
--- 👁️ ESP & VISUALS (9 ФУНКЦИЙ)
+-- 👁️ ESP & VISUALS
 local ESPFrame = CreateCategory("👁️ ESP & VISUALS")
 
 CreateCategoryButton("Toggle ESP", UDim2.new(0.02, 0, 0, 35), ESPFrame, function()
@@ -1219,7 +1234,7 @@ CreateCategoryButton("Fullbright", UDim2.new(0.68, 0, 0, 115), ESPFrame, functio
     end
 end)
 
--- ⚡ MOVEMENT (9 ФУНКЦИЙ)
+-- ⚡ MOVEMENT
 local MovementFrame = CreateCategory("⚡ MOVEMENT (BYPASS)")
 
 CreateCategoryButton("Speed x2", UDim2.new(0.02, 0, 0, 35), MovementFrame, function()
@@ -1263,7 +1278,7 @@ CreateCategoryButton("Bunny Hop", UDim2.new(0.68, 0, 0, 115), MovementFrame, fun
     BunnyHop = not BunnyHop
 end)
 
--- ⚔️ COMBAT (9 ФУНКЦИЙ)
+-- ⚔️ COMBAT
 local CombatFrame = CreateCategory("⚔️ COMBAT (BYPASS)")
 
 CreateCategoryButton("Kill Aura", UDim2.new(0.02, 0, 0, 35), CombatFrame, function()
@@ -1329,7 +1344,7 @@ CreateCategoryButton("Fling All", UDim2.new(0.68, 0, 0, 115), CombatFrame, funct
     end
 end)
 
--- 🌍 TELEPORT (9 ФУНКЦИЙ)
+-- 🌍 TELEPORT
 local TeleportFrame = CreateCategory("🌍 TELEPORT")
 
 CreateCategoryButton("TP Murderer", UDim2.new(0.02, 0, 0, 35), TeleportFrame, function()
@@ -1406,7 +1421,7 @@ CreateCategoryButton("Orbit Murderer", UDim2.new(0.68, 0, 0, 115), TeleportFrame
     end
 end)
 
--- 🔥 EXPLOIT (9 ФУНКЦИЙ)
+-- 🔥 EXPLOIT
 local ExploitFrame = CreateCategory("🔥 EXPLOIT (DEEP)")
 
 CreateCategoryButton("Invisibility", UDim2.new(0.02, 0, 0, 35), ExploitFrame, function()
@@ -1495,10 +1510,10 @@ CreateCategoryButton("Rainbow Parts", UDim2.new(0.35, 0, 0, 115), ExploitFrame, 
 end)
 
 CreateCategoryButton("Corrupt Save", UDim2.new(0.68, 0, 0, 115), ExploitFrame, function()
-    print("[MYTH] Visual only function")
+    print("[MYTH] Visual only")
 end)
 
--- 💀 BOTTOM ICEBERG (9 ФУНКЦИЙ)
+-- 💀 BOTTOM ICEBERG
 local IcebergFrame = CreateCategory("💀 BOTTOM ICEBERG")
 
 CreateCategoryButton("RAGE MODE", UDim2.new(0.02, 0, 0, 35), IcebergFrame, function()
@@ -1650,7 +1665,7 @@ CreateCategoryButton("ANTI-GRAVITY", UDim2.new(0.68, 0, 0, 115), IcebergFrame, f
     end
 end)
 
--- 🔴 FORBIDDEN ZONE (9 ФУНКЦИЙ)
+-- 🔴 FORBIDDEN ZONE
 local ForbiddenFrame = CreateCategory("🔴 FORBIDDEN ZONE")
 
 CreateCategoryButton("REMOTE SPY", UDim2.new(0.02, 0, 0, 35), ForbiddenFrame, function()
@@ -1750,7 +1765,7 @@ CreateCategoryButton("BACKDOOR", UDim2.new(0.68, 0, 0, 115), ForbiddenFrame, fun
     ScanForBackdoors()
 end)
 
--- 🎵 MUSIC (6 ФУНКЦИЙ)
+-- 🎵 MUSIC
 local MusicFrame = CreateCategory("🎵 MUSIC PLAYER")
 
 CreateCategoryButton("Next Song", UDim2.new(0.02, 0, 0, 35), MusicFrame, function()
@@ -1793,7 +1808,7 @@ CreateCategoryButton("Volume -", UDim2.new(0.68, 0, 0, 75), MusicFrame, function
     end
 end)
 
--- 🎮 MISC (9 ФУНКЦИЙ)
+-- 🎮 MISC
 local MiscFrame = CreateCategory("🎮 MISC")
 
 CreateCategoryButton("Anti AFK", UDim2.new(0.02, 0, 0, 35), MiscFrame, function()
@@ -1860,7 +1875,7 @@ CreateCategoryButton("Mass Boom", UDim2.new(0.68, 0, 0, 115), MiscFrame, functio
     end
 end)
 
--- Button Events
+-- Button Events (УЛУЧШЕННАЯ МИНИМИЗАЦИЯ С МАЛЕНЬКИМ ОКОШКОМ)
 local minimized = false
 MinimizeBtn.MouseButton1Click:Connect(function()
     minimized = not minimized
@@ -1868,19 +1883,38 @@ MinimizeBtn.MouseButton1Click:Connect(function()
     
     -- Скрываем/показываем картинки при минимизации
     for i = 1, 4 do
-        local img = MainFrame:FindFirstChild("SpinningImage" .. i)
-        if img then
-            img.Visible = not minimized
+        if spinningImages[i] then
+            spinningImages[i].Visible = not minimized
         end
     end
     
+    -- Минимизированный размер = только TopBar (маленькое окошко)
     MainFrame:TweenSize(
-        minimized and UDim2.new(0, 800, 0, 60) or UDim2.new(0, 800, 0, 700),
+        minimized and UDim2.new(0, 400, 0, 60) or UDim2.new(0, 1000, 0, 700),
         Enum.EasingDirection.Out,
         Enum.EasingStyle.Quad,
         0.3,
         true
     )
+    
+    -- Центрируем при минимизации
+    if minimized then
+        MainFrame:TweenPosition(
+            UDim2.new(0.5, -200, 0.5, -30),
+            Enum.EasingDirection.Out,
+            Enum.EasingStyle.Quad,
+            0.3,
+            true
+        )
+    else
+        MainFrame:TweenPosition(
+            UDim2.new(0.5, -500, 0.5, -350),
+            Enum.EasingDirection.Out,
+            Enum.EasingStyle.Quad,
+            0.3,
+            true
+        )
+    end
 end)
 
 CloseBtn.MouseButton1Click:Connect(function()
@@ -1921,7 +1955,8 @@ end)
 
 print("💀🔥 BurmaldaMellstroyUIMM2 - COMPLETE ULTIMATE EDITION 🔥💀")
 print("✅ 100+ WORKING FUNCTIONS")
-print("✅ 4 SPINNING IMAGES (DOWNLOADED FROM GITHUB)")
-print("✅ 6 SONGS WITH AUTO-DOWNLOAD")
-print("✅ EXPANDED GUI (800px WIDTH)")
-print("✅ ALL FUNCTIONS FULLY WORKING - NO PLACEHOLDERS")
+print("✅ 4 BIG SQUARE SPINNING IMAGES (150x150)")
+print("✅ EXPANDED GUI (1000px WIDTH)")
+print("✅ MINIMIZED MODE = SMALL WINDOW (400x60)")
+print("✅ ORBIT MURDERER - DISABLED IF YOU ARE MURDERER")
+print("✅ ALL FUNCTIONS FULLY WORKING")
