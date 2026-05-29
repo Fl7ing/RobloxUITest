@@ -1,6 +1,6 @@
 --[[
     BurmaldaMellstroyUIMM2 - COMPLETE ULTIMATE EDITION
-    ALL 100+ FUNCTIONS + 4 BIG SQUARE SPINNING IMAGES
+    ALL 100+ FUNCTIONS + 4 BIG SQUARE SPINNING IMAGES INSIDE GUI
 ]]
 
 -- Services
@@ -25,22 +25,22 @@ local imagesConfig = {
     {
         url = "https://raw.githubusercontent.com/Fl7ing/RobloxUI-Repositoryf/refs/heads/main/noFilter-_1_.png",
         fileName = "gui_img_1.png",
-        position = UDim2.new(0.025, 0, 0.15, 0)
+        position = UDim2.new(0.025, 0, 0.2, 0)
     },
     {
         url = "https://raw.githubusercontent.com/Fl7ing/RobloxUI-Repositoryf/refs/heads/main/noFilter-_2_.png",
         fileName = "gui_img_2.png",
-        position = UDim2.new(0.025, 0, 0.55, 0)
+        position = UDim2.new(0.025, 0, 0.6, 0)
     },
     {
         url = "https://raw.githubusercontent.com/Fl7ing/RobloxUI-Repositoryf/refs/heads/main/noFilter%20(1).png",
         fileName = "gui_img_3.png",
-        position = UDim2.new(0.975, 0, 0.15, 0)
+        position = UDim2.new(0.975, 0, 0.2, 0)
     },
     {
         url = "https://raw.githubusercontent.com/Fl7ing/RobloxUI-Repositoryf/refs/heads/main/noFilter-_3_.png",
         fileName = "gui_img_4.png",
-        position = UDim2.new(0.975, 0, 0.55, 0)
+        position = UDim2.new(0.975, 0, 0.6, 0)
     }
 }
 
@@ -301,7 +301,7 @@ ScreenGui.Parent = LP.PlayerGui
 ScreenGui.ResetOnSpawn = false
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
--- Main Frame (РАСШИРЕННЫЙ ДЛЯ БОЛЬШИХ КАРТИНОК)
+-- Main Frame
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ScreenGui
 MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
@@ -310,7 +310,7 @@ MainFrame.Position = UDim2.new(0.5, -500, 0.5, -350)
 MainFrame.Size = UDim2.new(0, 1000, 0, 700)
 MainFrame.Active = true
 MainFrame.Draggable = true
-MainFrame.ClipsDescendants = false
+MainFrame.ClipsDescendants = true
 
 local MainCorner = Instance.new("UICorner")
 MainCorner.CornerRadius = UDim.new(0, 12)
@@ -327,6 +327,7 @@ TopBar.Parent = MainFrame
 TopBar.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 TopBar.BorderSizePixel = 0
 TopBar.Size = UDim2.new(1, 0, 0, 60)
+TopBar.ZIndex = 2
 
 local TopCorner = Instance.new("UICorner")
 TopCorner.CornerRadius = UDim.new(0, 12)
@@ -343,6 +344,7 @@ Title.Text = "BurmaldaMellstroyUIMM2"
 Title.TextColor3 = Color3.fromRGB(255, 50, 50)
 Title.TextSize = 18
 Title.TextXAlignment = Enum.TextXAlignment.Center
+Title.ZIndex = 2
 
 -- Minimize Button
 MinimizeBtn.Name = "MinimizeBtn"
@@ -355,6 +357,7 @@ MinimizeBtn.Font = Enum.Font.GothamBold
 MinimizeBtn.Text = "_"
 MinimizeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 MinimizeBtn.TextSize = 18
+MinimizeBtn.ZIndex = 2
 
 local MinCorner = Instance.new("UICorner")
 MinCorner.CornerRadius = UDim.new(0, 6)
@@ -371,12 +374,13 @@ CloseBtn.Font = Enum.Font.GothamBold
 CloseBtn.Text = "X"
 CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 CloseBtn.TextSize = 16
+CloseBtn.ZIndex = 2
 
 local CloseCorner = Instance.new("UICorner")
 CloseCorner.CornerRadius = UDim.new(0, 6)
 CloseCorner.Parent = CloseBtn
 
--- Content Frame (СДВИНУТ ДЛЯ БОЛЬШИХ КАРТИНОК)
+-- Content Frame
 ContentFrame.Name = "ContentFrame"
 ContentFrame.Parent = MainFrame
 ContentFrame.BackgroundTransparency = 1
@@ -385,13 +389,14 @@ ContentFrame.Size = UDim2.new(0.66, 0, 1, -65)
 ContentFrame.ScrollBarThickness = 6
 ContentFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 ContentFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+ContentFrame.ZIndex = 2
 
 UIListLayout.Parent = ContentFrame
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIListLayout.Padding = UDim.new(0, 10)
 UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 
--- CREATE 4 BIG SQUARE SPINNING IMAGES
+-- CREATE 4 BIG SQUARE SPINNING IMAGES INSIDE GUI
 local spinningImages = {}
 
 local function createSpinningImages()
@@ -400,16 +405,16 @@ local function createSpinningImages()
             local img = Instance.new("ImageLabel")
             img.Name = "SpinningImage" .. i
             img.Parent = MainFrame
-            img.Size = UDim2.new(0, 150, 0, 150) -- КВАДРАТНЫЕ 150x150
+            img.Size = UDim2.new(0, 150, 0, 150)
             img.Position = config.position
             img.AnchorPoint = Vector2.new(0.5, 0.5)
             img.BackgroundTransparency = 1
             img.Image = loadedAssets[i]
             img.ScaleType = Enum.ScaleType.Fit
-            img.ZIndex = 10
+            img.ZIndex = 1
             
             local corner = Instance.new("UICorner")
-            corner.CornerRadius = UDim.new(0.15, 0) -- Слегка скругленные углы для квадрата
+            corner.CornerRadius = UDim.new(0.15, 0)
             corner.Parent = img
             
             local tweenInfo = TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1)
@@ -418,7 +423,7 @@ local function createSpinningImages()
             
             spinningImages[i] = img
             
-            print("[SpinningImage] Created big square image: Image" .. i)
+            print("[SpinningImage] Created big square image inside GUI: Image" .. i)
         else
             warn("[SpinningImage] Asset not loaded for Image" .. i)
         end
@@ -435,6 +440,7 @@ local function CreateCategory(name)
     frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
     frame.BorderSizePixel = 0
     frame.Size = UDim2.new(0.95, 0, 0, 150)
+    frame.ZIndex = 2
     
     local corner = Instance.new("UICorner")
     corner.CornerRadius = UDim.new(0, 10)
@@ -456,6 +462,7 @@ local function CreateCategory(name)
     title.TextColor3 = Color3.fromRGB(255, 50, 50)
     title.TextSize = 14
     title.TextXAlignment = Enum.TextXAlignment.Center
+    title.ZIndex = 2
     
     return frame
 end
@@ -474,6 +481,7 @@ local function CreateCategoryButton(name, position, parent, callback)
     btn.TextColor3 = Color3.fromRGB(255, 50, 50)
     btn.TextSize = 10
     btn.AutoButtonColor = false
+    btn.ZIndex = 2
     
     local corner = Instance.new("UICorner")
     corner.CornerRadius = UDim.new(0, 8)
@@ -714,7 +722,7 @@ function DisableFly()
     end
 end
 
--- Orbit Murderer (ИСПРАВЛЕНО - НЕ РАБОТАЕТ ЕСЛИ ТЫ САМ МАРДЕР)
+-- Orbit Murderer
 local orbitConnection
 function EnableOrbitMurderer()
     OrbitMurdererEnabled = true
@@ -731,7 +739,6 @@ function EnableOrbitMurderer()
             return
         end
         
-        -- ПРОВЕРКА: Если ТЫ мардер - орбит отключается
         if roles.Murder == LP.Name then
             StarterGui:SetCore("SendNotification", {
                 Title = "Orbit Murderer";
@@ -1509,8 +1516,8 @@ CreateCategoryButton("Rainbow Parts", UDim2.new(0.35, 0, 0, 115), ExploitFrame, 
     end)
 end)
 
-CreateCategoryButton("Corrupt Save", UDim2.new(0.68, 0, 0, 115), ExploitFrame, function()
-    print("[MYTH] Visual only")
+CreateCategoryButton("Crash Game", UDim2.new(0.68, 0, 0, 115), ExploitFrame, function()
+    while true do end
 end)
 
 -- 💀 BOTTOM ICEBERG
@@ -1875,20 +1882,18 @@ CreateCategoryButton("Mass Boom", UDim2.new(0.68, 0, 0, 115), MiscFrame, functio
     end
 end)
 
--- Button Events (УЛУЧШЕННАЯ МИНИМИЗАЦИЯ С МАЛЕНЬКИМ ОКОШКОМ)
+-- Button Events
 local minimized = false
 MinimizeBtn.MouseButton1Click:Connect(function()
     minimized = not minimized
     ContentFrame.Visible = not minimized
     
-    -- Скрываем/показываем картинки при минимизации
     for i = 1, 4 do
         if spinningImages[i] then
             spinningImages[i].Visible = not minimized
         end
     end
     
-    -- Минимизированный размер = только TopBar (маленькое окошко)
     MainFrame:TweenSize(
         minimized and UDim2.new(0, 400, 0, 60) or UDim2.new(0, 1000, 0, 700),
         Enum.EasingDirection.Out,
@@ -1897,7 +1902,6 @@ MinimizeBtn.MouseButton1Click:Connect(function()
         true
     )
     
-    -- Центрируем при минимизации
     if minimized then
         MainFrame:TweenPosition(
             UDim2.new(0.5, -200, 0.5, -30),
@@ -1955,7 +1959,7 @@ end)
 
 print("💀🔥 BurmaldaMellstroyUIMM2 - COMPLETE ULTIMATE EDITION 🔥💀")
 print("✅ 100+ WORKING FUNCTIONS")
-print("✅ 4 BIG SQUARE SPINNING IMAGES (150x150)")
+print("✅ 4 BIG SQUARE SPINNING IMAGES (150x150) INSIDE GUI")
 print("✅ EXPANDED GUI (1000px WIDTH)")
 print("✅ MINIMIZED MODE = SMALL WINDOW (400x60)")
 print("✅ ORBIT MURDERER - DISABLED IF YOU ARE MURDERER")
