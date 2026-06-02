@@ -206,6 +206,11 @@ end
 -- Music System
 local SONGS = {
     {
+        name = "Fish_Hardstyle",
+        url = "https://github.com/Fl7ing/RobloxUI-Repositoryf/raw/refs/heads/main/YTDown_YouTube_Fish-Hardstyle-Super-Slowed_Media_ed2o439cJTY_009_128k.mp3",
+        file = "Fish_Hardstyle.mp3"
+    },
+    {
         name = "Terranova",
         url = "https://github.com/Fl7ing/RobloxUI-Repositoryf/raw/refs/heads/main/YTDown_YouTube_Terranova-so-far-away-sped-up_Media_rltkZq9AMAw_006_128k.mp3",
         file = "Terranova_SpedUp.mp3"
