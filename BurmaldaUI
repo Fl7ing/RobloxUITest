@@ -1608,7 +1608,7 @@ local SONGS = {
     {name="Fish Hardstyle", url="https://github.com/Fl7ing/RobloxUI-Repositoryf/raw/refs/heads/main/YTDown_YouTube_Fish-Hardstyle-Super-Slowed_Media_ed2o439cJTY_009_128k.mp3",           file="mm2_Fish.mp3"},
     {name="Terranova",      url="https://github.com/Fl7ing/RobloxUI-Repositoryf/raw/refs/heads/main/YTDown_YouTube_Terranova-so-far-away-sped-up_Media_rltkZq9AMAw_006_128k.mp3",         file="mm2_Terra.mp3"},
     {name="Privet",         url="https://github.com/Fl7ing/RobloxUI-Repositoryf/raw/refs/heads/main/YTDown_YouTube_Privet-Privet_Media_klzBSu7XNEU_009_128k.mp3",                         file="mm2_Privet.mp3"},
-    {name="Bass",           url="https://github.com/Fl7ing/RobloxUI-Repositoryf/raw/refs/heads/main/0627.MP3",                                                   file="mm2_KotakBas.mp3"},
+    {name="Bass",           url="https://github.com/Fl7ing/RobloxUI-Repositoryf/raw/refs/heads/main/d79283283976185f18dccd083050c373.mp3",                                                file="mm2_KotakBas.mp3"},
     {name="Taco Bell",      url="https://github.com/Fl7ing/RobloxUI-Repositoryf/raw/refs/heads/main/YTDown_YouTube_TACO-BELL-Super-Slowed_Media_DM_eFGed1Z8_009_128k.mp3",                file="mm2_Taco.mp3"},
     {name="DJ Play",        url="https://github.com/Fl7ing/RobloxUI-Repositoryf/raw/refs/heads/main/YTDown_YouTube_dj-play-this-song-SUPER-slowed_Media_2BQZFcOmTs_009_128k%20(1).mp3",   file="mm2_DJ.mp3"},
     {name="TikTok",         url="https://github.com/Fl7ing/RobloxUI-Repositoryf/raw/refs/heads/main/ssstik.io_1779873476340.mp3",                                                         file="mm2_TikTok.mp3"},
